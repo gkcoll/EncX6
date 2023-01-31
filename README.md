@@ -1,6 +1,6 @@
 # [EncX6](https://github.com/gkcoll/EncX6)
 
-[简体中文版](https://github.com/gkcoll/EncX6/blob/README_zh-CN.md) | [繁體中文版](https://github.com/gkcoll/EncX6/blob/README_zh-TW.md)
+[简体中文版](https://github.com/gkcoll/EncX6/blob/main/README_zh-CN.md) | [繁體中文版](https://github.com/gkcoll/EncX6/blob/main/README_zh-TW.md)
 
 > ## Attention
 > 
