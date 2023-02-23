@@ -1,12 +1,18 @@
-"""
-Author:       灰尘疾客
-Date:         2023/01/16
-OS Url:       https://github.com/gkcoll/EncX6
-CN Meaning:   六重保镖
-Introduction: 由一编码（Base 64）、五加密（凯撒 + 摩斯电码 + 范围表 + MD5 校验 + 栅栏），生成不是给人看的东西，理论上只要不要透露此程序，将没人能够知道你在发什么，尽管用上机器也不一定能得出加密原理。
-Thanks:       Tester: Lanyu
-Suggestion:   TThe developer advised you to import this module use simple code syntax like `import EncX6 as e6`.
-"""
+'''
+@File        :   main.py
+@Time        :   2023/02/18 16:28:18
+@Author      :   @灰尘疾客
+@Version     :   1.0
+@Site        :   https://www.gkcoll.xyz
+@Desc        :   One encoding method (Base 64) and five encryption methods (Caesar + MorseCode + RangeTable + MD5Verify + Fence) generate a non-visible thing. 
+                 In theory, if you only want to disclose this program, no one will know what you are sending, although the encryption principle may not be obtained by using the machine.
+@Thanks      :   Tester: Lanyu
+@Suggestion  :   The developer advised you to import this module use simple code syntax like `import EncX6 as e6`.
+
+'''
+
+
+
 import EncX6.Caesar as Caesar
 import EncX6.MorseCode as MorseCode
 import EncX6.Base64_DIY as Base64
@@ -14,13 +20,13 @@ import EncX6.MD5 as MD5
 import EncX6.Fence as Fence
 from EncX6.functions import *
 import EncX6.RangeTable as RangeTable
-from time import strftime as s
+import time
 
 
 def total_encrypt(content: str, caesar_key: int = 3, fence_key: int = 2) -> str:
-    """总加密函数"""
-    keeplog(s("%Y-%m-%d %H:%M:%S"))
-    keeplog("加密内容:" + content)
+    """Total encryption function."""
+    keeplog(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    keeplog("Ciphertext:" + content)
     b64 = Base64.encode(content)
     caesar = Caesar.encrypt(b64, caesar_key)
     morse = MorseCode.encrypt(caesar)
@@ -33,15 +39,15 @@ def total_encrypt(content: str, caesar_key: int = 3, fence_key: int = 2) -> str:
 
 
 def total_decrypt(ciphertext: str, caesar_key: int = 3, fence_key: int = 2) -> str:
-    """总解密函数"""
+    """Total decryption function."""
     try:
-        keeplog(s("%Y-%m-%d %H:%M:%S"))
-        keeplog("解密内容:" + ciphertext)
+        keeplog(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        keeplog("Cleartext:" + ciphertext)
         added_md5 = Fence.decrypt(ciphertext, fence_key)
         rand_dec = MD5.md5_verify(added_md5)
         if rand_dec == "Verifying ERROR":
-            # MD5 验证不一致触发事件
-            debug_print("MD5 校验错误，请检查密文是否完整")
+            # MD5 verification inconsistency trigger event
+            debug_print("MD5 Varifying Error! Please check the integrity of ciphertext..")
             return "<!!!--Decrypted Error--!!!>"
         else:
             morse = RangeTable.decrypt(rand_dec)
@@ -54,9 +60,11 @@ def total_decrypt(ciphertext: str, caesar_key: int = 3, fence_key: int = 2) -> s
     else:
         return cleartext
 
+
 def main():
     # You can add something for testing here.
     pass
+
 
 if __name__ == "__main__":
     main()
