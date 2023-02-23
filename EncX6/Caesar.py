@@ -1,9 +1,19 @@
+'''
+@File    :   Caesar.py
+@Time    :   2023/02/12 19:59:06
+@Author  :   @灰尘疾客
+@Version :   1.0
+@Site    :   https://www.gkcoll.xyz
+@Desc    :   Caesar Cipher module(A displacement encryption method).
+'''
+
+
 from EncX6.functions import debug_print as dbp
 caesar_list = "oMQUmaBrV0lIjg1dyu2ntZ3bNWS4XYpT5DkPRh6iLz7vKfJ8sqOH9EGFcACwex"
 
 
 def encrypt(content: str, key: int = 3) -> str:
-    """用以对字符串进行移位加密，即凯撒密码"""
+    """Caesar encryption function."""
     ciphertext = str()
     try:
         for i in content:
@@ -13,14 +23,14 @@ def encrypt(content: str, key: int = 3) -> str:
             else:
                 ciphertext += i
     except:
-        dbp("凯撒密码加密出错！")
+        dbp("Caesar encrypting FAILD!")
     else:
-        dbp("凯撒加密结果:" + ciphertext)
+        dbp("Caesar encrypt result:" + ciphertext)
         return ciphertext
 
 
 def decrypt(ciphertext: str, key: int = 3) -> str:
-    """用以解密凯撒密码加密的内容"""
+    """Caesar decryption function."""
     cleartext = str()
     try:
         for i in ciphertext:
@@ -30,7 +40,7 @@ def decrypt(ciphertext: str, key: int = 3) -> str:
             else:
                 cleartext += i
     except:
-        dbp("凯撒密码解密错误！")
+        dbp("Caesar decrypt FAILD!")
     else:
-        dbp("凯撒解密结果:" + cleartext)
+        dbp("Caesar decrypting result:" + cleartext)
         return cleartext
