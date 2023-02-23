@@ -1,31 +1,42 @@
+'''
+@File    :   Fence.py
+@Time    :   2023/02/12 20:00:14
+@Author  :   @灰尘疾客
+@Version :   1.0
+@Site    :   https://www.gkcoll.xyz
+@Desc    :   Fence encryption module.
+'''
+
+
 from EncX6.functions import cut
 from EncX6.functions import debug_print as dbp
 
 
 def encrypt(content: str, key: int = 2) -> str:
+    """Fence encryption function."""
     if len(content) % key:
-        # 补齐行数的倍数个字符
+        # Multiple characters of the number of completion lines.
         content += "@" * (key - (len(content) % key))
     strings = cut(content, key)
 
-    # 以下代码的逻辑很绕，必要时候可拿笔纸演算
+    # The logic of the following code is very complicated. If necessary, you can use pen and paper to calculate
     ciphertext = str()
     for index in range(key):
         for item in strings:
             ciphertext += item[index]
-    dbp("栅栏加密结果:" + ciphertext)
+    dbp("Fence encrypt result:" + ciphertext)
     return ciphertext
 
 
 def decrypt(encryption: str, key: int = 2) -> str:
     strings = cut(encryption, int(len(encryption)/key))
 
-    # 以下代码的逻辑更绕，必要时候可拿笔纸演算
+    # The logic of the following code is very complicated. If necessary, you can use pen and paper to calculate
     cleartext = str()
     for index in range(int(len(encryption)/key)):
         for item in range(key):
             cleartext += strings[item][index]
 
     cleartext = cleartext.rstrip("@")
-    dbp("栅栏解密结果:" + cleartext)
+    dbp("Fence decrypt result:" + cleartext)
     return cleartext
